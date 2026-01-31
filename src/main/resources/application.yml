@@ -2,50 +2,46 @@ spring:
   application:
     name: ikuna-backend
 
-  jackson:
-    default-property-inclusion: always
-    # Esto ayuda a que las fechas (LocalDate) se vean bien en el JSON
-    serialization:
-      write-dates-as-timestamps: false
-
-  # CONFIGURACIÓN BASE DE DATOS (MySQL)
+  # CONFIGURACIÓN BASE DE DATOS
   datasource:
-    # Si usas Docker o Localhost, asegúrate de crear la DB 'ikuna_db' primero
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/ikuna_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC}
-    username: ${DATABASE_USERNAME:root}  # Cambia 'root' si tu usuario es 'ikuna'
-    password: ${DATABASE_PASSWORD:root}  # Pon tu contraseña local aquí
+    # 1. Corregido el nombre de la DB de 'ikuna2' a 'ikuna' (según tu foto)
+    # 2. Si estás en local, intenta usar 'localhost' en vez de la IP específica para evitar problemas de ruteo,
+    #    a menos que sea una IP obligatoria de tu red.
+    url: jdbc:mysql://localhost:3307/ikuna
+    username: ikuna
+    password: ${DATABASE_PASSWORD:ikuna123}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      maximum-pool-size: ${DB_MAX_POOL_SIZE:10}
-      minimum-idle: ${DB_MIN_IDLE:2}
-      idle-timeout: ${DB_IDLE_TIMEOUT:30000}
-      max-lifetime: ${DB_MAX_LIFETIME:600000}
-      connection-timeout: ${DB_CONNECTION_TIMEOUT:30000}
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      max-lifetime: 600000
+      connection-timeout: 30000
 
   # JPA & HIBERNATE
   jpa:
     hibernate:
-      ddl-auto: update # Crea/Actualiza las tablas (ikuna_projects, ikuna_admins) automáticamente
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        # IMPORTANTE: Eliminamos la línea 'dialect' específica.
+        # Hibernate detectará que es MySQL automáticamente.
+        # Si insiste en pedir uno, usa: org.hibernate.dialect.MySQLDialect
 
-  # MIGRACIONES (Desactivado por ahora para desarrollo rápido)
   flyway:
     enabled: false
 
-# CONFIGURACIÓN PERSONALIZADA IKUNA (Para tu JWT)
 ikuna:
   security:
     jwt-secret: ${JWT_SECRET:UnaClaveSuperSecretaParaFirmarLosTokensDelColectivoIkuna2024}
-    jwt-expiration-ms: 86400000 # 24 horas
+    jwt-expiration-ms: 86400000
 
-# CONFIGURACIÓN CORS (Para que React pueda conectarse)
 cors:
   allowed-origins:
-   - "*"
+    - "http://localhost:5173" # Es mejor ser específico que usar "*" si usas allow-credentials: true
+    - "http://localhost:3000"
   allowed-methods:
     - GET
     - POST
@@ -55,16 +51,5 @@ cors:
   allowed-headers: "*"
   allow-credentials: true
 
-# SERVIDOR
 server:
-  port: ${APPLICATION_PORT:8080} # Estandarizado a 8080 para coincidir con tus fetch()
-  tomcat:
-    threads:
-      max: 50
-      min-spare: 5
-    accept-count: 100
-    connection-timeout: 20000
-  compression:
-    enabled: true
-    min-response-size: 1024
-    mime-types: application/json,text/html,text/xml,text/plain
+  port: 8080
