@@ -1,6 +1,6 @@
 package com.example.colectivoIkuna.application.mapper;
 
-import com.example.colectivoIkuna.application.dto.TeamMemberDTO;
+import com.example.colectivoIkuna.application.dto.request.TeamMemberDTO;
 import com.example.colectivoIkuna.domain.model.TeamMember;
 import org.mapstruct.Mapper;
 

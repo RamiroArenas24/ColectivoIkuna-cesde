@@ -1,9 +1,14 @@
 package com.example.colectivoIkuna.domain.port.out;
 
-import com.example.colectivoIkuna.domain.model.AdminUser;
+import com.example.colectivoIkuna.domain.model.IkunaUser;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface AdminUserRepositoryPort {
-  Optional<AdminUser> findByUsername(String username);
-  AdminUser save(AdminUser user);
+  Optional<IkunaUser> findByUsername(String username);
+  Optional<IkunaUser> findById(Long id);
+  IkunaUser save(IkunaUser user);
+  List<IkunaUser> findByStatus(String status);
+  void deleteById(Long id);
 }

@@ -1,4 +1,4 @@
-package com.example.colectivoIkuna.application.dto;
+package com.example.colectivoIkuna.application.dto.request;
 
 import lombok.Data;
 

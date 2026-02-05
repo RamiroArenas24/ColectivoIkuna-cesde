@@ -1,6 +1,6 @@
 package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 
-import com.example.colectivoIkuna.application.dto.CulturalProjectDTO;
+import com.example.colectivoIkuna.application.dto.request.CulturalProjectDTO;
 import com.example.colectivoIkuna.application.mapper.CulturalProjectMapper;
 import com.example.colectivoIkuna.application.usecases.IkunaManagerUseCase;
 import org.springframework.web.bind.annotation.*;
