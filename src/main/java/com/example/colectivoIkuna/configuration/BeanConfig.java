@@ -3,7 +3,7 @@ package com.example.colectivoIkuna.configuration;
 import com.example.colectivoIkuna.application.usecases.AdminAuthUseCase;
 import com.example.colectivoIkuna.application.usecases.IkunaManagerUseCase;
 import com.example.colectivoIkuna.application.usecases.UserManagementUseCase;
-import com.example.colectivoIkuna.domain.port.out.AdminUserRepositoryPort;
+import com.example.colectivoIkuna.domain.port.out.IkunaUserRepositoryPort;
 import com.example.colectivoIkuna.domain.port.out.CulturalProjectRepositoryPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +17,12 @@ public class BeanConfig {
   }
 
   @Bean
-  public AdminAuthUseCase adminAuth(AdminUserRepositoryPort repo) {
+  public AdminAuthUseCase adminAuth(IkunaUserRepositoryPort repo) {
     return new AdminAuthUseCase(repo);
   }
 
   @Bean
-  public UserManagementUseCase userManagementUseCase(AdminUserRepositoryPort repo) {
+  public UserManagementUseCase userManagementUseCase(IkunaUserRepositoryPort repo) {
     return new UserManagementUseCase(repo);
   }
 

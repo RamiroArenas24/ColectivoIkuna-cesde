@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AdminUserRepository extends JpaRepository<IkunaUser, Long> {
+public interface IkunaUserRepository extends JpaRepository<IkunaUser, Long> {
   Optional<IkunaUser> findByUsername(String username);
   List<IkunaUser> findByStatus(String status);
+  Optional<IkunaUser> findByEmail(String email);
 }

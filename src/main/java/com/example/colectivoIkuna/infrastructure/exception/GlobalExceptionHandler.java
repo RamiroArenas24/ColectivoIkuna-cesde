@@ -16,19 +16,24 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
     Map<String, String> errors = new HashMap<>();
-
     ex.getBindingResult().getAllErrors().forEach((error) -> {
       String fieldName = ((FieldError) error).getField();
       String errorMessage = error.getDefaultMessage();
       errors.put(fieldName, errorMessage);
     });
-
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
   }
 
-  // Captura errores de negocio (Ej: Usuario no encontrado)
   @ExceptionHandler(RuntimeException.class)
   public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
+    Map<String, String> error = new HashMap<>();
+    error.put("error", ex.getMessage());
+    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+  }
+
+  // Agregamos manejo para IllegalArgumentException (usado en registros duplicados)
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ResponseEntity<Map<String, String>> handleIllegalArgument(IllegalArgumentException ex) {
     Map<String, String> error = new HashMap<>();
     error.put("error", ex.getMessage());
     return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);

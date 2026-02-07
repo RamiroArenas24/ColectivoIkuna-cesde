@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/ikuna")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*") // Agregado para evitar problemas de CORS con React
 public class IkunaDashboardController {
 
   private final IkunaManagerUseCase ikunaManager;

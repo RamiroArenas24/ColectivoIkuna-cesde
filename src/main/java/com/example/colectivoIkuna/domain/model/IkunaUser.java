@@ -17,7 +17,7 @@ public class IkunaUser {
   private String username;
   private String password;
   private String fullName;
-  private String role;
+  private String role; //SUPER_ADMIN, COLLABORATOR
   private String email;
 
   private String status; // "PENDING", "ACTIVE", "REJECTED"

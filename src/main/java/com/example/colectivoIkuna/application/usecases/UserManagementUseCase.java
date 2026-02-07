@@ -1,16 +1,15 @@
 package com.example.colectivoIkuna.application.usecases;
 
+import com.example.colectivoIkuna.domain.model.CulturalProject;
 import com.example.colectivoIkuna.domain.model.IkunaUser;
-import com.example.colectivoIkuna.domain.port.out.AdminUserRepositoryPort;
+import com.example.colectivoIkuna.domain.port.out.IkunaUserRepositoryPort;
 import lombok.RequiredArgsConstructor;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
 public class UserManagementUseCase {
 
-  private final AdminUserRepositoryPort userRepo;
+  private final IkunaUserRepositoryPort userRepo;
 
   public List<IkunaUser> getPendingUsers() {
     return userRepo.findByStatus("PENDING");
@@ -29,9 +28,20 @@ public class UserManagementUseCase {
   }
 
   public IkunaUser registerRequest(IkunaUser user) {
-    user.setRole("COLLABORATOR"); // Por defecto entra con rol bajo
-    user.setStatus("PENDING");    // Por defecto entra esperando aprobación
-    user.setRequestDate(LocalDate.now());
+    if (userRepo.findByUsername(user.getUsername()).isPresent()) {
+      throw new IllegalArgumentException("El usuario '" + user.getUsername() + "' ya existe.");
+    }
+
+    if (user.getRole() == null || user.getRole().isEmpty()) {
+      user.setRole("COLLABORATOR");
+    }
+
+    if (user.getStatus() == null || user.getStatus().isEmpty()) {
+      user.setStatus("PENDING");
+    }
+
+    user.setRequestDate(java.time.LocalDate.now());
+
     return userRepo.save(user);
   }
 
@@ -43,7 +53,25 @@ public class UserManagementUseCase {
   }
 
   public void rejectUser(Long userId) {
+    if (!userRepo.findById(userId).isPresent()) {
+      throw new RuntimeException("No se puede rechazar, el usuario no existe.");
+    }
     userRepo.deleteById(userId);
+  }
+
+  public CulturalProject launchOrUpdateProject(CulturalProject project) {
+    // VALIDACIÓN 1: Fechas coherentes
+    if (project.getExecutionDate() != null && project.getExecutionDate().isBefore(java.time.LocalDate.now())) {
+      // Opcional: permitir fechas pasadas solo si es carga histórica
+      // throw new IllegalArgumentException("La fecha del proyecto no puede ser en el pasado");
+    }
+
+    // VALIDACIÓN 2: Título obligatorio
+    if (project.getTitle() == null || project.getTitle().isEmpty()) {
+      throw new IllegalArgumentException("El proyecto debe tener un título.");
+    }
+
+    return project;
   }
 
 }

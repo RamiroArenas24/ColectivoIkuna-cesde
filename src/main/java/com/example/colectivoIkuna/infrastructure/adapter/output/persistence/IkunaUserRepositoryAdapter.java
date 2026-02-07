@@ -1,8 +1,8 @@
 package com.example.colectivoIkuna.infrastructure.adapter.output.persistence;
 
 import com.example.colectivoIkuna.domain.model.IkunaUser;
-import com.example.colectivoIkuna.domain.port.out.AdminUserRepositoryPort;
-import com.example.colectivoIkuna.infrastructure.adapter.repository.AdminUserRepository;
+import com.example.colectivoIkuna.domain.port.out.IkunaUserRepositoryPort;
+import com.example.colectivoIkuna.infrastructure.adapter.repository.IkunaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class AdminUserRepositoryAdapter implements AdminUserRepositoryPort {
+public class IkunaUserRepositoryAdapter implements IkunaUserRepositoryPort {
 
-  private final AdminUserRepository jpaRepository;
+  private final IkunaUserRepository jpaRepository;
 
   @Override
   public Optional<IkunaUser> findByUsername(String username) {
@@ -22,7 +22,7 @@ public class AdminUserRepositoryAdapter implements AdminUserRepositoryPort {
 
   @Override
   public Optional<IkunaUser> findById(Long id) {
-    return Optional.empty();
+    return jpaRepository.findById(id);
   }
 
   @Override
@@ -32,11 +32,11 @@ public class AdminUserRepositoryAdapter implements AdminUserRepositoryPort {
 
   @Override
   public List<IkunaUser> findByStatus(String status) {
-    return List.of();
+    return jpaRepository.findByStatus(status);
   }
 
   @Override
   public void deleteById(Long id) {
-
+    jpaRepository.deleteById(id);
   }
 }

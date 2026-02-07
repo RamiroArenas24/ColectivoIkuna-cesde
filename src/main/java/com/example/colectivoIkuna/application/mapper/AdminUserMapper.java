@@ -18,7 +18,7 @@ public interface AdminUserMapper {
   // --- DE REQUEST (FRONT) A ENTIDAD (BD) ---
   // Ignoramos ID, Status y Date porque eso lo pone la lógica de negocio, no el usuario
   @Mapping(target = "id", ignore = true)
-  @Mapping(target = "status", ignore = true)
+  //@Mapping(target = "status", ignore = true)
   @Mapping(target = "requestDate", ignore = true)
   IkunaUser toEntity(UserRequestDTO dto);
 
