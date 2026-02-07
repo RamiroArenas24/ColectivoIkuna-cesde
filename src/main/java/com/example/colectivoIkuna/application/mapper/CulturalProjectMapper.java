@@ -1,6 +1,6 @@
 package com.example.colectivoIkuna.application.mapper;
 
-import com.example.colectivoIkuna.application.dto.CulturalProjectDTO;
+import com.example.colectivoIkuna.application.dto.request.CulturalProjectDTO;
 import com.example.colectivoIkuna.domain.model.CulturalProject;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

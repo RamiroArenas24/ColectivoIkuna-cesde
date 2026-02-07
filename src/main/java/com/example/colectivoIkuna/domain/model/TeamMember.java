@@ -10,7 +10,7 @@ public class TeamMember {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
+  private Long userId; //El ID de la tabla ikuna_users
   private String name;
   private String email;
   private String role;
