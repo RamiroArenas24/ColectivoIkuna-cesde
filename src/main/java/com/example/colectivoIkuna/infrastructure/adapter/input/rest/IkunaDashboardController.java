@@ -3,6 +3,7 @@ package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 import com.example.colectivoIkuna.application.dto.request.CulturalProjectDTO;
 import com.example.colectivoIkuna.application.mapper.CulturalProjectMapper;
 import com.example.colectivoIkuna.application.usecases.IkunaManagerUseCase;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
@@ -25,14 +26,14 @@ public class IkunaDashboardController {
   }
 
   @PostMapping("/projects")
-  public CulturalProjectDTO createProject(@RequestBody CulturalProjectDTO dto) {
+  public CulturalProjectDTO createProject(@Valid @RequestBody CulturalProjectDTO dto) {
     var entity = projectMapper.toEntity(dto);
     var saved = ikunaManager.launchOrUpdateProject(entity);
     return projectMapper.toDTO(saved);
   }
 
   @PutMapping("/projects/{id}")
-  public CulturalProjectDTO updateProject(@PathVariable Long id, @RequestBody CulturalProjectDTO dto) {
+  public CulturalProjectDTO updateProject(@PathVariable Long id,@Valid @RequestBody CulturalProjectDTO dto) {
     dto.setId(id);
     var entity = projectMapper.toEntity(dto);
     var saved = ikunaManager.launchOrUpdateProject(entity);

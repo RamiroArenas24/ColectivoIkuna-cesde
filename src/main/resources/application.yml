@@ -4,9 +4,6 @@ spring:
 
   # CONFIGURACIÓN BASE DE DATOS
   datasource:
-    # 1. Corregido el nombre de la DB de 'ikuna2' a 'ikuna' (según tu foto)
-    # 2. Si estás en local, intenta usar 'localhost' en vez de la IP específica para evitar problemas de ruteo,
-    #    a menos que sea una IP obligatoria de tu red.
     url: jdbc:mysql://localhost:3307/ikuna
     username: ikuna
     password: ${DATABASE_PASSWORD:ikuna123}
