@@ -2,6 +2,7 @@ package com.example.colectivoIkuna.application.dto;
 
 import lombok.Data;
 import java.util.List;
+import java.math.BigDecimal;
 
 @Data
 public class CulturalProjectDTO {
@@ -13,7 +14,12 @@ public class CulturalProjectDTO {
   private String category;
   private String description;
   private String imageUrl;
+  private BigDecimal totalBudget;
+  private BigDecimal executedBudget;
 
   private List<TeamMemberDTO> teamMembers;
   private List<TaskDTO> tasks;
+
+  private List<EventCalendarDTO> calendar;
+  private List<ProjectCollaborationDTO> collaborators;
 }
