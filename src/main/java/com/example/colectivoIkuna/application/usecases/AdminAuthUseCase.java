@@ -1,16 +1,16 @@
 package com.example.colectivoIkuna.application.usecases;
 
-import com.example.colectivoIkuna.domain.model.AdminUser;
-import com.example.colectivoIkuna.domain.port.out.AdminUserRepositoryPort;
+import com.example.colectivoIkuna.domain.model.IkunaUser;
+import com.example.colectivoIkuna.domain.port.out.IkunaUserRepositoryPort;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class AdminAuthUseCase {
 
-  private final AdminUserRepositoryPort adminRepo;
+  private final IkunaUserRepositoryPort adminRepo;
 
-  public AdminUser authenticate(String username, String password) {
-    AdminUser admin = adminRepo.findByUsername(username)
+  public IkunaUser authenticate(String username, String password) {
+    IkunaUser admin = adminRepo.findByUsername(username)
         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
     // En producción usa BCrypt
@@ -23,7 +23,7 @@ public class AdminAuthUseCase {
   // Método auxiliar para crear el primer admin si no existe
   public void createInitialAdmin() {
     if(adminRepo.findByUsername("admin").isEmpty()){
-      AdminUser admin = new AdminUser();
+      IkunaUser admin = new IkunaUser();
       admin.setUsername("admin");
       admin.setPassword("ikuna2024");
       admin.setFullName("Super Admin");
