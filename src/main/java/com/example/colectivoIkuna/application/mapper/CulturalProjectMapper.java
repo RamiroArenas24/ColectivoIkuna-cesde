@@ -9,17 +9,28 @@ import org.mapstruct.Named;
 import java.time.LocalDate;
 
 // 'uses' le dice a MapStruct que use los otros mappers para las listas de tareas y miembros
-@Mapper(componentModel = "spring", uses = {TaskMapper.class, TeamMemberMapper.class})
+@Mapper(componentModel = "spring", uses = {
+        TaskMapper.class,
+        TeamMemberMapper.class,
+        CalendarMapper.class,
+        CollaborationMapper.class
+})
 public interface CulturalProjectMapper {
 
   // --- DE ENTIDAD A DTO ---
   @Mapping(source = "executionDate", target = "date", qualifiedByName = "dateToString")
   @Mapping(source = "coverImageUrl", target = "imageUrl")
+  // Mapeamos las nuevas listas de la entidad a los nombres del DTO
+  @Mapping(source = "eventCalendars", target = "eventCalendars")
+  @Mapping(source = "projectCollaborations", target = "projectCollaborations")
   CulturalProjectDTO toDTO(CulturalProject entity);
 
   // --- DE DTO A ENTIDAD ---
   @Mapping(source = "date", target = "executionDate", qualifiedByName = "stringToDate")
   @Mapping(source = "imageUrl", target = "coverImageUrl")
+  // Mapeamos las listas del DTO de vuelta a las entidades
+  @Mapping(source = "eventCalendars", target = "eventCalendars")
+  @Mapping(source = "projectCollaborations", target = "projectCollaborations")
   CulturalProject toEntity(CulturalProjectDTO dto);
 
   // Métodos default para lógica personalizada (fechas)
