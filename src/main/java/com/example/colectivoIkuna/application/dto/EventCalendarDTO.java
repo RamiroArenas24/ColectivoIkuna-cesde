@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Data
 public class EventCalendarDTO {
     private long id;
-    private String nombreActividad;
-    private String fechaHora;
-    private BigDecimal avancePorcentaje;
+    private String activityName;
+    private String dateTime;
+    private BigDecimal percentageProgress;
 }

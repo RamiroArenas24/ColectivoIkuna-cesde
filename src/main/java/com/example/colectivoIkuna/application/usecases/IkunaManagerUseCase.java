@@ -21,7 +21,7 @@ public class IkunaManagerUseCase {
     // 1. Asegurar relación bidireccional y LIMPIAR IDs si es creación
     if (project.getEventCalendars() != null) {
       project.getEventCalendars().forEach(evento -> {
-        evento.setProyecto(project);
+        evento.setProject(project);
         // Si el proyecto es nuevo (id null), los hijos NO deben tener ID
         if (project.getId() == null) {
           evento.setId(null);
@@ -31,7 +31,7 @@ public class IkunaManagerUseCase {
 
     if (project.getColaboradores() != null) {
       project.getColaboradores().forEach(colab -> {
-        colab.setProyecto(project);
+        colab.setCulturalProject(project);
         if (project.getId() == null) {
           colab.setId(null);
         }

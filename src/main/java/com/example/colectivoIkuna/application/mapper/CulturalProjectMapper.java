@@ -21,16 +21,16 @@ public interface CulturalProjectMapper {
   @Mapping(source = "executionDate", target = "date", qualifiedByName = "dateToString")
   @Mapping(source = "coverImageUrl", target = "imageUrl")
   // Mapeamos las nuevas listas de la entidad a los nombres del DTO
-  @Mapping(source = "calendarioEventos", target = "calendar")
-  @Mapping(source = "colaboradores", target = "collaborators")
+  @Mapping(source = "eventCalendars", target = "eventCalendars")
+  @Mapping(source = "projectCollaborations", target = "projectCollaborations")
   CulturalProjectDTO toDTO(CulturalProject entity);
 
   // --- DE DTO A ENTIDAD ---
   @Mapping(source = "date", target = "executionDate", qualifiedByName = "stringToDate")
   @Mapping(source = "imageUrl", target = "coverImageUrl")
   // Mapeamos las listas del DTO de vuelta a las entidades
-  @Mapping(source = "calendar", target = "calendarioEventos")
-  @Mapping(source = "collaborators", target = "colaboradores")
+  @Mapping(source = "eventCalendars", target = "eventCalendars")
+  @Mapping(source = "projectCollaborations", target = "projectCollaborations")
   CulturalProject toEntity(CulturalProjectDTO dto);
 
   // Métodos default para lógica personalizada (fechas)

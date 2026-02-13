@@ -11,12 +11,19 @@ import java.time.LocalDateTime;
 @Mapper(componentModel = "spring")
 public interface CalendarMapper {
 
-    @Mapping(source = "fechaHora", target = "fechaHora", qualifiedByName = "dateTimeToString")
+    // --- DE ENTIDAD A DTO ---
+    @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "dateTimeToString")
+    @Mapping(source = "activityName", target = "activityName")
+    @Mapping(source = "percentageProgress", target = "percentageProgress")
     EventCalendarDTO toDTO(EventCalendar entity);
 
-    @Mapping(source = "fechaHora", target = "fechaHora", qualifiedByName = "stringToDateTime")
+    // --- DE DTO A ENTIDAD ---
+    @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "stringToDateTime")
+    @Mapping(source = "activityName", target = "activityName")
+    @Mapping(source = "percentageProgress", target = "percentageProgress")
     EventCalendar toEntity(EventCalendarDTO dto);
 
+    // Métodos de conversión para LocalDateTime
     @Named("dateTimeToString")
     default String dateTimeToString(LocalDateTime dateTime) {
         return dateTime != null ? dateTime.toString() : null;

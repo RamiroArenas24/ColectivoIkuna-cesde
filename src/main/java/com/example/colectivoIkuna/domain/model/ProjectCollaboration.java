@@ -16,15 +16,15 @@ public class ProjectCollaboration {
     private Long id;
 
     @Column(name = "RolEspecifico")
-    private String rolEspecifico; // Ej: "Muralista,"Tallerista", "Organizador de eventos", etc.
+    private String specificRole; // Ej: "Muralista,"Tallerista", "Organizador de eventos", etc.
         @Column(name = "fechaInicioParticipacion")
-    private LocalDate fechaInicioParticipacion;
+    private LocalDate initialParticipationDate;
 
     @ManyToOne
     @JoinColumn(name = "IdProyecto")
-    private CulturalProject proyecto;
+    private CulturalProject culturalProject;
 
     @ManyToOne
     @JoinColumn(name = "IdUsuario")
-    private TeamMember colaborador;
+    private TeamMember collaborator;
 }
