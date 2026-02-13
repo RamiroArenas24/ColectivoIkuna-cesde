@@ -37,7 +37,7 @@ public class IkunaDashboardController {
   }
 
   @PutMapping("/projects/{id}")
-  public CulturalProjectDTO updateProject(@PathVariable Long id,@Valid @RequestBody CulturalProjectDTO dto) {
+  public ResponseEntity<CulturalProjectDTO> updateProject(@PathVariable Long id, @Valid @RequestBody CulturalProjectDTO dto) {
     dto.setId(id);
     var updated = ikunaUseCase.launchOrUpdateProject(projectMapper.toEntity(dto));
     return ResponseEntity.ok(projectMapper.toDTO(updated));
