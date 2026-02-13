@@ -8,12 +8,16 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CollaborationMapper {
 
-    @Mapping(source = "colaborador.id", target = "colaboradorId")
-    @Mapping(source = "colaborador.name", target = "nombreColaborador")
-    @Mapping(source = "fechaInicioParticipacion", target = "fechaInicioParticipacion")
+    // --- DE ENTIDAD A DTO ---
+    @Mapping(source = "collaborator.id", target = "collaboratorId")
+    @Mapping(source = "collaborator.name", target = "collaboratorName")
+    @Mapping(source = "initialParticipationDate", target = "startDate")
+    @Mapping(source = "specificRole", target = "role")
     ProjectCollaborationDTO toDTO(ProjectCollaboration entity);
 
-    @Mapping(source = "colaboradorId", target = "colaborador.id")
-    @Mapping(source = "fechaInicioParticipacion", target = "fechaInicioParticipacion")
+    // --- DE DTO A ENTIDAD ---
+    @Mapping(source = "collaboratorId", target = "collaborator.id")
+    @Mapping(source = "startDate", target = "initialParticipationDate")
+    @Mapping(source = "role", target = "specificRole")
     ProjectCollaboration toEntity(ProjectCollaborationDTO dto);
 }

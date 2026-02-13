@@ -15,15 +15,15 @@ public class EventCalendar {
     private Long id;
 
     @Column(name = "NombreActividad", nullable = false)
-    private String nombreActividad;
+    private String activityName;
     @Column(name = "FechaHora")
-    private LocalDateTime fechaHora;
+    private LocalDateTime dateTime;
     @Column(name = "AvancePorcentaje")
-    private Double avancePorcentaje;
+    private Double percentageProgress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdProyecto")
-    private CulturalProject proyecto;
+    private CulturalProject project;
 
 }
 

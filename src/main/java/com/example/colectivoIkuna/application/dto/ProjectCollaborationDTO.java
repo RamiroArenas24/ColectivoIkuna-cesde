@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class ProjectCollaborationDTO {
     private long id;
-    private String rolEspecifico;
-    private String fechaInicioParticipacion;
-    private Long colaboradorId;
-    private String nombreColaborador;
+    private String specificRole;
+    private String initialParticipationDate;
+    private Long collaboratorId;
+    private String collaboratorName;
 }
