@@ -3,6 +3,9 @@ package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 import com.example.colectivoIkuna.application.dto.CulturalProjectDTO;
 import com.example.colectivoIkuna.application.mapper.CulturalProjectMapper;
 import com.example.colectivoIkuna.application.usecases.IkunaManagerUseCase;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/ikuna")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*") // Agregado para evitar problemas de CORS con React
 public class IkunaDashboardController {
 
   private final IkunaManagerUseCase ikunaUseCase;
