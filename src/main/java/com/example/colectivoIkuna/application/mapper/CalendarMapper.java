@@ -13,6 +13,8 @@ public interface CalendarMapper {
 
     // --- DE ENTIDAD A DTO ---
     @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "dateTimeToString")
+    // Si los nombres son iguales (activityName -> activityName), no hace falta @Mapping,
+    // pero los dejamos para asegurar.
     @Mapping(source = "activityName", target = "activityName")
     @Mapping(source = "percentageProgress", target = "percentageProgress")
     EventCalendarDTO toDTO(EventCalendar entity);
@@ -23,7 +25,6 @@ public interface CalendarMapper {
     @Mapping(source = "percentageProgress", target = "percentageProgress")
     EventCalendar toEntity(EventCalendarDTO dto);
 
-    // Métodos de conversión para LocalDateTime
     @Named("dateTimeToString")
     default String dateTimeToString(LocalDateTime dateTime) {
         return dateTime != null ? dateTime.toString() : null;

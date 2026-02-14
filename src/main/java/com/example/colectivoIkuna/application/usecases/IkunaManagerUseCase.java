@@ -29,8 +29,8 @@ public class IkunaManagerUseCase {
       });
     }
 
-    if (project.getColaboradores() != null) {
-      project.getColaboradores().forEach(colab -> {
+    if (project.getCollaborator() != null) {
+      project.getCollaborator().forEach(colab -> {
         colab.setCulturalProject(project);
         if (project.getId() == null) {
           colab.setId(null);

@@ -17,8 +17,6 @@ public class CulturalProjectDTO {
   private BigDecimal totalBudget;
   private BigDecimal executedBudget;
 
-  private List<TeamMemberDTO> teamMembers;
-  private List<TaskDTO> tasks;
 
   private List<EventCalendarDTO> calendar;
   private List<ProjectCollaborationDTO> collaborators;
