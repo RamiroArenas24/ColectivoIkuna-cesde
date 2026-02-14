@@ -12,19 +12,19 @@ import java.time.LocalDate;
 public class ProjectCollaboration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdColaboracion")
+    @Column(name = "id_colaboracion")
     private Long id;
 
-    @Column(name = "RolEspecifico")
+    @Column(name = "rol_especifico")
     private String specificRole; // Ej: "Muralista,"Tallerista", "Organizador de eventos", etc.
-        @Column(name = "fechaInicioParticipacion")
+        @Column(name = "fechaInicio_participacion")
     private LocalDate initialParticipationDate;
 
     @ManyToOne
-    @JoinColumn(name = "IdProyecto")
+    @JoinColumn(name = "id_proyecto")
     private CulturalProject culturalProject;
 
     @ManyToOne
-    @JoinColumn(name = "IdUsuario")
+    @JoinColumn(name = "id_usuario")
     private TeamMember collaborator;
 }

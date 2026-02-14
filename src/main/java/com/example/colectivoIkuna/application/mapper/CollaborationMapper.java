@@ -11,13 +11,15 @@ public interface CollaborationMapper {
     // --- DE ENTIDAD A DTO ---
     @Mapping(source = "collaborator.id", target = "collaboratorId")
     @Mapping(source = "collaborator.name", target = "collaboratorName")
-    @Mapping(source = "initialParticipationDate", target = "startDate")
-    @Mapping(source = "specificRole", target = "role")
+    // SOURCE: Entidad (initialParticipationDate) -> TARGET: DTO (initialParticipationDate)
+    @Mapping(source = "initialParticipationDate", target = "initialParticipationDate")
+    // SOURCE: Entidad (specificRole) -> TARGET: DTO (specificRole)
+    @Mapping(source = "specificRole", target = "specificRole")
     ProjectCollaborationDTO toDTO(ProjectCollaboration entity);
 
     // --- DE DTO A ENTIDAD ---
     @Mapping(source = "collaboratorId", target = "collaborator.id")
-    @Mapping(source = "startDate", target = "initialParticipationDate")
-    @Mapping(source = "role", target = "specificRole")
+    @Mapping(source = "initialParticipationDate", target = "initialParticipationDate")
+    @Mapping(source = "specificRole", target = "specificRole")
     ProjectCollaboration toEntity(ProjectCollaborationDTO dto);
 }
