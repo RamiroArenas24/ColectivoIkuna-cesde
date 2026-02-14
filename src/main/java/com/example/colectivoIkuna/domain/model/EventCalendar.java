@@ -11,18 +11,18 @@ import java.time.LocalDateTime;
 public class EventCalendar {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name = "IdEvento")
+    @Column(name = "id_evento")
     private Long id;
 
-    @Column(name = "NombreActividad", nullable = false)
+    @Column(name = "nombre_actividad", nullable = false)
     private String activityName;
-    @Column(name = "FechaHora")
+    @Column(name = "fecha_hora")
     private LocalDateTime dateTime;
-    @Column(name = "AvancePorcentaje")
+    @Column(name = "avance_porcentaje")
     private Double percentageProgress;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdProyecto")
+    @JoinColumn(name = "id_proyecto")
     private CulturalProject project;
 
 }
