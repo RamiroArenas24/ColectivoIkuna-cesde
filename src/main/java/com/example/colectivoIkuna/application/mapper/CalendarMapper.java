@@ -1,6 +1,6 @@
 package com.example.colectivoIkuna.application.mapper;
 
-import com.example.colectivoIkuna.application.dto.EventCalendarDTO;
+import com.example.colectivoIkuna.application.dto.response.EventCalendarDTO;
 import com.example.colectivoIkuna.domain.model.EventCalendar;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

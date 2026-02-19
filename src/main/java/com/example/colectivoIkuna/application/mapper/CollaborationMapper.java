@@ -1,6 +1,6 @@
 package com.example.colectivoIkuna.application.mapper;
 
-import com.example.colectivoIkuna.application.dto.ProjectCollaborationDTO;
+import com.example.colectivoIkuna.application.dto.response.ProjectCollaborationDTO;
 import com.example.colectivoIkuna.domain.model.ProjectCollaboration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

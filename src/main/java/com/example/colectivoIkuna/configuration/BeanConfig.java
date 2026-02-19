@@ -11,19 +11,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanConfig {
 
-  @Bean
-  public IkunaManagerUseCase ikunaManager(CulturalProjectRepositoryPort repo) {
-    return new IkunaManagerUseCase(repo);
-  }
+    @Bean
+    public IkunaManagerUseCase ikunaManager(CulturalProjectRepositoryPort repo) {
+        return new IkunaManagerUseCase(repo);
+    }
 
-  @Bean
-  public AdminAuthUseCase adminAuth(IkunaUserRepositoryPort repo) {
-    return new AdminAuthUseCase(repo);
-  }
-
-  @Bean
-  public UserManagementUseCase userManagementUseCase(IkunaUserRepositoryPort repo) {
-    return new UserManagementUseCase(repo);
-  }
-
+    @Bean
+    public AdminAuthUseCase adminAuth(IkunaUserRepositoryPort repo) {
+        return new AdminAuthUseCase(repo);
+    }
+    @Bean
+    public UserManagementUseCase userManagementUseCase(IkunaUserRepositoryPort repo) {
+        return new UserManagementUseCase(repo);
+    }
 }

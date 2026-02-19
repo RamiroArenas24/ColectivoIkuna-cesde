@@ -1,17 +1,13 @@
 package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 
-import com.example.colectivoIkuna.application.dto.CulturalProjectDTO;
+import com.example.colectivoIkuna.application.dto.response.CulturalProjectDTO;
 import com.example.colectivoIkuna.application.mapper.CulturalProjectMapper;
 import com.example.colectivoIkuna.application.usecases.IkunaManagerUseCase;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/ikuna")
@@ -30,14 +26,14 @@ public class IkunaDashboardController {
     return ResponseEntity.ok(dtos);
   }
 
-  @PostMapping("/projects")
+  @PostMapping ("/projects")
   public ResponseEntity<CulturalProjectDTO> createProject(@RequestBody CulturalProjectDTO dto) {
-      var savedProject = ikunaUseCase.launchOrUpdateProject(projectMapper.toEntity(dto));
-      return new ResponseEntity<>(projectMapper.toDTO(savedProject), HttpStatus.CREATED);
+    var savedProject = ikunaUseCase.launchOrUpdateProject(projectMapper.toEntity(dto));
+    return new ResponseEntity<>(projectMapper.toDTO(savedProject), HttpStatus.CREATED);
   }
 
   @PutMapping("/projects/{id}")
-  public ResponseEntity<CulturalProjectDTO> updateProject(@PathVariable Long id, @Valid @RequestBody CulturalProjectDTO dto) {
+  public ResponseEntity<CulturalProjectDTO> updateProject(@PathVariable Long id, @RequestBody CulturalProjectDTO dto) {
     dto.setId(id);
     var updated = ikunaUseCase.launchOrUpdateProject(projectMapper.toEntity(dto));
     return ResponseEntity.ok(projectMapper.toDTO(updated));
