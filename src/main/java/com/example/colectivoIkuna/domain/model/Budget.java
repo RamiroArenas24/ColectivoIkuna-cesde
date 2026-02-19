@@ -17,24 +17,32 @@ public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long budgetId;
 
-     /* conexión mediante clave foranea PROJECTID
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
-     */
+    private CulturalProject project;
+
+    @Column(name = "total_income", nullable = false)
+    private BigDecimal totalIncome;
+
+    @Column(name = "total_expense", nullable = false)
+    private BigDecimal totalExpense;
+
+    private BigDecimal balance;
+
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
+
+    @Column(name = "end_date", nullable = false)
+    private LocalDate endDate;
 
     @Column(nullable = false)
     private BigDecimal amount;
 
-    private BigDecimal totalIncome;
-    private BigDecimal totalExpense;
-    private BigDecimal balance;
-
-    private LocalDate startDate;
-    private LocalDate endDate;
-
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BudgetStatus status;
 
     //Actualización del balance automáticamente
     @PrePersist
@@ -44,7 +52,10 @@ public class Budget {
         if (this.totalExpense == null) this.totalExpense = BigDecimal.ZERO;
         if (this.amount == null) this.amount = BigDecimal.ZERO;
 
-        this.balance = this.amount.add(this.totalIncome).add(this.totalExpense);
+        this.balance = this.amount
+                .add(this.totalIncome)
+                .subtract(this.totalExpense);
+
     }
 
 }

@@ -1,9 +1,12 @@
 package com.example.colectivoIkuna.application.usecases;
 
-import com.example.colectivoIkuna.application.dto.BudgetDTO;
+import com.example.colectivoIkuna.application.dto.request.BudgetDTO;
 import com.example.colectivoIkuna.application.mapper.BudgetMapper;
 import com.example.colectivoIkuna.domain.model.Budget;
+import com.example.colectivoIkuna.domain.model.CulturalProject;
 import com.example.colectivoIkuna.domain.port.out.BudgetRepository;
+import com.example.colectivoIkuna.domain.port.out.CulturalProjectRepositoryPort;
+import com.example.colectivoIkuna.infrastructure.adapter.output.persistence.CulturalProjectRepositoryAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class BudgetUseCase {
+
+    private final CulturalProjectRepositoryPort culturalProjectRepositoryPort;
 
     private final BudgetRepository budgetRepository;
     private final BudgetMapper budgetMapper;
@@ -32,8 +37,16 @@ public class BudgetUseCase {
             throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio");
         }
 
+        if (budgetDTO.getProjectId() == null) {
+            throw new IllegalArgumentException("Ingrese el ID del proyecto");
+        }
+
+        CulturalProject project = culturalProjectRepositoryPort.findById(budgetDTO.getProjectId())
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
 
         Budget budget = budgetMapper.toEntity(budgetDTO);
+
+        budget.setProject(project);
 
         if (budget.getTotalIncome() == null) budget.setTotalIncome(BigDecimal.ZERO);
         if (budget.getTotalExpense() == null) budget.setTotalExpense(BigDecimal.ZERO);
@@ -80,10 +93,13 @@ public class BudgetUseCase {
 
     @Transactional
     public void deleteBudget(Long id) {
-        if (!budgetRepository.existsById(id)) {
-            throw new RuntimeException("No se puede eliminar. El presupuesto con ID" + id + "no existe");
-        }
-        budgetRepository.deleteById(id);
-    }
+        Budget b = budgetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("NO EXISTE"));
 
+        System.out.println("ENCONTRADO: " + b.getBudgetId());
+
+        budgetRepository.delete(b);
+    }
 }
+
+

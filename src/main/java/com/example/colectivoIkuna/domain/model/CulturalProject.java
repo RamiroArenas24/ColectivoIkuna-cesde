@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class CulturalProject {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_proyecto")
+  @Column(name = "project_id")
   private Long id;
 
   @Column(name = "titulo_proyecto")

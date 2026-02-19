@@ -1,8 +1,7 @@
 package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 
-import com.example.colectivoIkuna.application.dto.BudgetDTO;
+import com.example.colectivoIkuna.application.dto.request.BudgetDTO;
 import com.example.colectivoIkuna.application.usecases.BudgetUseCase;
-import com.example.colectivoIkuna.domain.model.Budget;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/budgets")
+@RequestMapping("/api/budgets")
 @RequiredArgsConstructor
 public class BudgetController {
 
     private final BudgetUseCase budgetservice;
 
-    @PostMapping
-    public ResponseEntity<Budget> create(@RequestBody BudgetDTO request) {
+    @PostMapping("/budgets")
+    public ResponseEntity<BudgetDTO> create(@RequestBody BudgetDTO request) {
+
+        System.out.println("DTO RECIBIDO");
+        System.out.println(request);
+
         BudgetDTO createBudget = budgetservice.createBudget(request);
-        return ResponseEntity.ok(new Budget());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createBudget);
     }
 
     @GetMapping("/{id}")

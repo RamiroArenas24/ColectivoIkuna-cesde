@@ -50,4 +50,9 @@ public class BudgetRepositoryImpl implements BudgetRepository {
     public boolean existsById(Long id) {
         return false;
     }
+
+    @Override
+    public void delete(Budget b) {
+
+    }
 }

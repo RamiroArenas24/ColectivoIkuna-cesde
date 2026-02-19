@@ -16,4 +16,6 @@ public interface BudgetRepository {
     List<Budget> findByProjectId(Long projectId);
 
     boolean existsById(Long id);
+
+    void delete(Budget b);
 }
