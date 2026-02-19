@@ -1,17 +1,13 @@
 package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 
-import com.example.colectivoIkuna.application.dto.CulturalProjectDTO;
+import com.example.colectivoIkuna.application.dto.response.CulturalProjectDTO;
 import com.example.colectivoIkuna.application.mapper.CulturalProjectMapper;
 import com.example.colectivoIkuna.application.usecases.IkunaManagerUseCase;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/ikuna")
