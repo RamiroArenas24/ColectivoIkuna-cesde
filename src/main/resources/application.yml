@@ -39,6 +39,7 @@ cors:
   allowed-origins:
     - "http://localhost:5173" # Es mejor ser específico que usar "*" si usas allow-credentials: true
     - "http://localhost:3000"
+    - "http://localhost:3001"
   allowed-methods:
     - GET
     - POST
