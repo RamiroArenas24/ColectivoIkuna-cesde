@@ -31,9 +31,9 @@ public class BudgetController {
         return ResponseEntity.ok(budgetservice.getBudgetById(id));
     }
 
-    @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<BudgetDTO>> getByProject(@PathVariable Long projectId) {
-        List<BudgetDTO> budgets = budgetservice.getAllBudgetsByProject(projectId);
+    @GetMapping("/project/{Id}")
+    public ResponseEntity<List<BudgetDTO>> getByProject(@PathVariable Long Id) {
+        List<BudgetDTO> budgets = budgetservice.getAllBudgetsByProject(Id);
         return ResponseEntity.ok(budgets);
     }
 
