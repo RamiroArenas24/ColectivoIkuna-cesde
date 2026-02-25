@@ -1,5 +1,7 @@
 package com.example.colectivoIkuna.application.dto.response;
 
+import com.example.colectivoIkuna.application.dto.request.TaskDTO;
+import com.example.colectivoIkuna.application.dto.request.TeamMemberDTO;
 import lombok.Data;
 import java.util.List;
 import java.math.BigDecimal;
@@ -20,4 +22,7 @@ public class CulturalProjectDTO {
 
   private List<EventCalendarDTO> calendar;
   private List<ProjectCollaborationDTO> collaborators;
+
+  private List<TaskDTO> tasks;
+  private List<TeamMemberDTO> teamMembers;
 }

@@ -34,6 +34,13 @@ public class IkunaDashboardController {
 
   @PutMapping("/projects/{id}")
   public ResponseEntity<CulturalProjectDTO> updateProject(@PathVariable Long id, @RequestBody CulturalProjectDTO dto) {
+
+    // ESTE LOG TE DIRÁ SI EL FRONTEND MANDÓ LA TAREA:
+    System.out.println("====== LLEGARON DATOS AL BACKEND ======");
+    System.out.println("Tareas en el DTO: " + dto.getTasks());
+    System.out.println("Miembros en el DTO: " + dto.getTeamMembers());
+    System.out.println("=======================================");
+
     dto.setId(id);
     var updated = ikunaUseCase.launchOrUpdateProject(projectMapper.toEntity(dto));
     return ResponseEntity.ok(projectMapper.toDTO(updated));
