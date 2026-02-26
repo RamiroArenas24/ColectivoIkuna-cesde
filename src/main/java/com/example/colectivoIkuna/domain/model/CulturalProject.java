@@ -52,4 +52,7 @@ public class CulturalProject {
 
   @OneToMany(mappedBy = "culturalProject", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<ProjectCollaboration> collaborator = new ArrayList<>();
+
+  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Budget> expenses = new ArrayList<>();
 }

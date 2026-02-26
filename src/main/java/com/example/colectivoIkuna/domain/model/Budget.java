@@ -44,6 +44,15 @@ public class Budget {
     @Column(nullable = false)
     private BudgetStatus status;
 
+    @Column(nullable = false)
+    private String concept;
+
+    @Column(name = "paid_to", nullable = false)
+    private String paidTo;
+
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
     //Actualización del balance automáticamente
     @PrePersist
     @PreUpdate

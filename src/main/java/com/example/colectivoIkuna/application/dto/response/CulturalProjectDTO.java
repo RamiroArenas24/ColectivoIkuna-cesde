@@ -1,5 +1,6 @@
 package com.example.colectivoIkuna.application.dto.response;
 
+import com.example.colectivoIkuna.application.dto.request.BudgetDTO;
 import com.example.colectivoIkuna.application.dto.request.TaskDTO;
 import com.example.colectivoIkuna.application.dto.request.TeamMemberDTO;
 import lombok.Data;
@@ -25,4 +26,5 @@ public class CulturalProjectDTO {
 
   private List<TaskDTO> tasks;
   private List<TeamMemberDTO> teamMembers;
+  private List<BudgetDTO> expenses;
 }

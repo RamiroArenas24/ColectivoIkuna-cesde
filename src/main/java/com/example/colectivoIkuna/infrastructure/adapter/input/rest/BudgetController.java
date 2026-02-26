@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/budgets")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class BudgetController {
 
     private final BudgetUseCase budgetservice;

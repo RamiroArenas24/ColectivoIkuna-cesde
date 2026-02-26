@@ -25,6 +25,7 @@ public interface CulturalProjectMapper {
   @Mapping(source = "collaborator", target = "collaborators") // Entidad (collaborator) -> DTO (collaborators)
   @Mapping(source = "tasks", target = "tasks")
   @Mapping(source = "teamMembers", target = "teamMembers")
+  @Mapping(source = "expenses", target = "expenses")
   CulturalProjectDTO toDTO(CulturalProject entity);
 
   // --- DE DTO A ENTIDAD ---
@@ -36,6 +37,7 @@ public interface CulturalProjectMapper {
   @Mapping(source = "collaborators", target = "collaborator")
   @Mapping(source = "tasks", target = "tasks") // <-- FORZAMOS LA RECOPILACIÓN
   @Mapping(source = "teamMembers", target = "teamMembers")
+  @Mapping(source = "expenses", target = "expenses")
   CulturalProject toEntity(CulturalProjectDTO dto);
 
   @Named("dateToString")
