@@ -1,20 +1,15 @@
 package com.example.colectivoIkuna.infrastructure.adapter.input.rest;
 
+import com.example.colectivoIkuna.application.dto.request.ChangePasswordDTO;
+import com.example.colectivoIkuna.application.dto.request.UpdateProfileDTO;
 import com.example.colectivoIkuna.application.dto.request.UserRequestDTO;
 import com.example.colectivoIkuna.application.dto.response.UserResponseDTO;
 import com.example.colectivoIkuna.application.mapper.AdminUserMapper;
 import com.example.colectivoIkuna.application.usecases.UserManagementUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -61,6 +56,36 @@ public class UserManagementController {
   @DeleteMapping("/{id}/reject")
   public void reject(@PathVariable Long id) {
     userUseCase.rejectUser(id);
+  }
+
+  @PatchMapping("/{id}/disable")
+  public ResponseEntity<Void> disableUser(@PathVariable Long id) {
+    userUseCase.disableUser(id);
+    return ResponseEntity.ok().build();
+  }
+
+  @PatchMapping("/{id}/enable")
+  public ResponseEntity<Void> enableUser(@PathVariable Long id) {
+    userUseCase.enableUser(id);
+    return ResponseEntity.ok().build();
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    userUseCase.deleteUser(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  @PutMapping("/{id}/profile")
+  public ResponseEntity<UserResponseDTO> updateProfile(@PathVariable Long id, @RequestBody @Valid UpdateProfileDTO request) {
+    var updatedUser = userUseCase.updateProfile(id, request);
+    return ResponseEntity.ok(userMapper.toDTO(updatedUser));
+  }
+
+  @PutMapping("/{id}/password")
+  public ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestBody @Valid ChangePasswordDTO request) {
+    userUseCase.changePassword(id, request);
+    return ResponseEntity.ok().build();
   }
 
 }

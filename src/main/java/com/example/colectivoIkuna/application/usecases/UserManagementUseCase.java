@@ -1,8 +1,11 @@
 package com.example.colectivoIkuna.application.usecases;
 
+import com.example.colectivoIkuna.application.dto.request.ChangePasswordDTO;
+import com.example.colectivoIkuna.application.dto.request.UpdateProfileDTO;
 import com.example.colectivoIkuna.domain.model.CulturalProject;
 import com.example.colectivoIkuna.domain.model.IkunaUser;
 import com.example.colectivoIkuna.domain.port.out.IkunaUserRepositoryPort;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -60,5 +63,58 @@ public class UserManagementUseCase {
         userRepo.deleteById(userId);
     }
 
+    @Transactional
+    public void disableUser(Long userId) {
+        IkunaUser user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        // Evitar que el admin principal se deshabilite a sí mismo por error (opcional pero recomendado)
+        if ("SUPER_ADMIN".equals(user.getRole()) && "admin".equals(user.getUsername())) {
+            throw new IllegalArgumentException("No puedes inhabilitar al Administrador Principal.");
+        }
+        user.setStatus("INACTIVE");
+        userRepo.save(user);
+    }
 
+    @Transactional
+    public void enableUser(Long userId) {
+        IkunaUser user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        user.setStatus("ACTIVE");
+        userRepo.save(user);
+    }
+
+    @Transactional
+    public void deleteUser(Long userId) {
+        IkunaUser user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        if ("SUPER_ADMIN".equals(user.getRole()) && "admin".equals(user.getUsername())) {
+            throw new IllegalArgumentException("No puedes eliminar al Administrador Principal.");
+        }
+        userRepo.deleteById(userId);
+    }
+
+    @Transactional
+    public IkunaUser updateProfile(Long userId, UpdateProfileDTO dto) {
+        IkunaUser user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        user.setFullName(dto.getFullName());
+        user.setEmail(dto.getEmail());
+
+        return userRepo.save(user);
+    }
+
+    @Transactional
+    public void changePassword(Long userId, ChangePasswordDTO dto) {
+        IkunaUser user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Validación de contraseña actual (Sin BCrypt por ahora, como tienes en AdminAuthUseCase)
+        if (!user.getPassword().equals(dto.getCurrentPassword())) {
+            throw new IllegalArgumentException("La contraseña actual es incorrecta");
+        }
+
+        user.setPassword(dto.getNewPassword());
+        userRepo.save(user);
+    }
 }
