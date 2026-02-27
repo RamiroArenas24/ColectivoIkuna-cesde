@@ -2,11 +2,12 @@ spring:
   application:
     name: ikuna-backend
 
-  # CONFIGURACIÓN BASE DE DATOS
+  # CONFIGURACIÓN BASE DE DATOS (SmarterASP + Render)
   datasource:
-    url: jdbc:mysql://localhost:3307/ikuna
-    username: ikuna
-    password: ${DATABASE_PASSWORD:ikuna123}
+    # URL configurada con tu host real: mysql8002.site4now.net
+    url: jdbc:mysql://${DB_HOST:mysql8002.site4now.net}:${DB_PORT:3306}/${DB_NAME:db_ac5fd8_ikunabd}
+    username: ${DB_USER:ac5fd8_ikunabd}
+    password: ${DB_PASSWORD:rootIkuna25.}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
